@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Poema & Playlist Romântica</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        /* Corações flutuantes */
+        .hearts {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .heart {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background: transparent;
+            animation: float 8s linear infinite;
+        }
+        .heart svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.8) rotate(0deg);
+                opacity: 0.7;
+            }
+            10% { opacity: 1; }
+            100% {
+                transform: translateY(-10vh) scale(1.2) rotate(360deg);
+                opacity: 0.2;
+            }
+        }
+        header {
+            background: linear-gradient(90deg, #ff80b5 0%, #6366f1 100%);
+            color: #fff;
+            padding: 2rem 1rem;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 2px 8px rgba(99,102,241,0.1);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            font-family: 'Dancing Script', cursive, Arial, sans-serif;
+            letter-spacing: 2px;
+        }
+        h2 {
+            margin-top: 1rem;
+            font-size: 1.3rem;
+            font-weight: 400;
+            font-style: italic;
+        }
+        .container {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(255,128,181,0.12);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .section-title {
+            font-family: 'Dancing Script', cursive, Arial, sans-serif;
+            color: #d72660;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        h3 {
+            font-size: 1.15rem;
+            color: #d72660;
+            white-space: pre-line;
+            margin-bottom: 2rem;
+            font-family: 'Dancing Script', cursive, Arial, sans-serif;
+        }
+        button {
+            background: linear-gradient(90deg, #ff80b5 0%, #6366f1 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.7rem 1.5rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            box-shadow: 0 2px 8px rgba(255,128,181,0.12);
+            margin-bottom: 1rem;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #ffb6d5 0%, #4338ca 100%);
+            transform: scale(1.05);
+        }
+        #spotify-player {
+            margin-top: 1.5rem;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+    </style>
+</head>
+<body>
+    <!-- Corações flutuantes -->
+    <div class="hearts"></div>
+    <header>
+        <h1>Oi, fiz esse site pra você</h1>
+        <p>Espero que goste!</p>
+        <h2>Um poema e uma playlist pra você</h2>
+    </header>
+    <div class="container">
+        <div>
+            <div class="section-title">Poema da Saudade</div>
+            <button id="togglePoema">Mostrar/Esconder Poema</button>
+            <h3 id="poema" style="display: none;">
+Saudade é faca que corta o peito,
+Um vazio que grita, um fogo desfeito.
+É o eco do riso que já não se ouve,
+A sombra do toque que o tempo remove.
+
+Quero-te só pra mim, em segredo guardado,
+Um mundo onde o amor é rei coroado.
+Teu olhar, meu refúgio, minha doce prisão,
+Cada batida minha é tua canção.
+
+Por ti, eu cruzo mares, escalo montanhas,
+Desafio o destino, enfrento as entranhas.
+Se o céu me negasse, eu roubaria as estrelas,
+Pra te dar o universo, só pra ter-te por bela.
+
+Saudade é promessa que não sei cumprir,
+Mas por ti, meu amor, eu vou até o fim.
+            </h3>
+        </div>
+        <hr style="margin:2rem 0;">
+        <div>
+            <div class="section-title">Playlist Romântica</div>
+            <button id="togglePlaylist">Mostrar/Esconder Playlist</button>
+            <div id="spotify-player" style="display: none;">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1HbmCa7dBvptnHuoZld4zK?utm_source=generator" width="100%" height="380" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"></iframe>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Mostrar/Esconder Poema
+        const btnPoema = document.getElementById('togglePoema');
+        const poema = document.getElementById('poema');
+        btnPoema.addEventListener('click', () => {
+            poema.style.display = poema.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // Mostrar/Esconder Playlist
+        const toggleBtn = document.getElementById('togglePlaylist');
+        const playerDiv = document.getElementById('spotify-player');
+        toggleBtn.addEventListener('click', () => {
+            playerDiv.style.display = playerDiv.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // Corações flutuantes
+        const heartsContainer = document.querySelector('.hearts');
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            const left = Math.random() * 100;
+            const delay = Math.random() * 8;
+            const duration = 6 + Math.random() * 4;
+            heart.style.left = left + 'vw';
+            heart.style.animationDelay = delay + 's';
+            heart.style.animationDuration = duration + 's';
+            heart.innerHTML = `
+                <svg viewBox="0 0 32 32">
+                    <path d="M23.6,4.6c-2.5,0-4.7,1.5-5.6,3.7C16.1,6.1,13.9,4.6,11.4,4.6C7.6,4.6,4.6,7.6,4.6,11.4
+                    c0,6.7,11.4,15.9,11.4,15.9s11.4-9.2,11.4-15.9C27.4,7.6,24.4,4.6,23.6,4.6z" fill="#ff80b5"/>
+                </svg>
+            `;
+            heartsContainer.appendChild(heart);
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000 + 1000);
+        }
+        setInterval(createHeart, 700);
+        // Inicializa alguns corações
+        for(let i=0; i<10; i++) createHeart();
+    </script>
+</body>
+</html>
